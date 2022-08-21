@@ -10,7 +10,7 @@ BellaBeat was founded by Urška Sršen and Sando Mur in 2013. It is a high-tech 
 Identifying the trends in smart device usage and provide recommendations that will help skateholders to make data-driven decisions regarding the marketing strategy and discover new potentials for the company.
 #### About the Data
 The dataset I used is *FitBit Fitness Tracker Data*, which is an open-source data provided by MÖBIUS on Kaggle. <br />
-It is collected from thirty eligible Fitbit users, who consented to the submission of personal tracker data via a survey distributed by Amazon Mechanical Turk between 03.12.2016 - 05.12.2016.  <br />
+It is collected from eligible Fitbit users, who consented to the submission of personal tracker data via a survey distributed by Amazon Mechanical Turk between 03.12.2016 - 05.12.2016.  <br />
 This dataset has overall 18 CSV files including information about minute-level output for physical activity, heart rate, weight and sleep monitoring between 04.12.2016 - 15.12.2016 (31 days period).
 
 ### Processing Data
