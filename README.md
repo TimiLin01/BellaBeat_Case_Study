@@ -52,7 +52,7 @@ Failed to create table: Error while reading data, error message: Could not parse
 Therefore, I had to define the schema for them manually, and let `ActivityHour` temporary be `STRING` instead of `TIMESTAMP`. <br />
 Now, having the files uploaded. I checked the datatypes for each table. Since, we temporarily set the `ActivityHour/Time/SleepDay` as `STING` for some tables, we can now set them as `DATETIME` using the following code:
 ```sql
---eg. For heartrate table
+-- eg. For heartrate table
 CREATE OR REPLACE TABLE `bellabeat-timilin.Fit_Data.heartrate`
 AS
 
@@ -65,6 +65,56 @@ SELECT
      `bellabeat-timilin.Fit_Data.heartrate` 
 ```
 And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_step`, `sleep_day` and `weight_log` tables.
+### Data Cleaning
+First, we check whether there is any NULL Value in our dataset:
+```sql
+-- eg. For daily_activity table
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.daily_activity`
+WHERE
+  Id IS NULL OR
+  ActivityDate IS NULL OR
+  TotalSteps IS NULL OR
+  TotalDistance IS NULL OR
+  TrackerDistance	IS NULL OR
+  LoggedActivitiesDistance IS NULL OR
+  VeryActiveDistance	IS NULL OR
+  ModeratelyActiveDistance	IS NULL OR
+  LightActiveDistance	IS NULL OR
+  SedentaryActiveDistance	IS NULL OR
+  VeryActiveMinutes	IS NULL OR
+  FairlyActiveMinutes	IS NULL OR
+  LightlyActiveMinutes	IS NULL OR	
+  SedentaryMinutes	IS NULL OR
+  Calories	IS NULL
+```
+We only found NULL Values in `weight_log` table, under the `Fat` column. These NULL Values can be ignored if we do not want to use information regarding users' fat. <br />
+Next, we search for any duplicates:
+```sql
+-- eg. For sleep_day table
+SELECT 
+  Id,
+  Time,
+  TotalSleepRecords,
+  TotalMinutesAsleep,
+  TotalTimeInBed,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.sleep_day`
+GROUP BY
+  Id,
+  Time,
+  TotalSleepRecords,
+  TotalMinutesAsleep,
+  TotalTimeInBed
+HAVING No_Of_Dup > 1
+```
+And we can actually find duplicates in `sleep_day` table:
+|   **Id**   |       **Time**      | **TotalSleepRecords** | **TotalMinutesAsleep** | **TotalTimeInBed** | **No_Of_Dup** |
+|:----------:|:-------------------:| ---------------------:| ----------------------:| ------------------:| -------------:|
+| 4388161847 | 2016-05-05T00:00:00 |                     1 |                    471 |                495 |             2 |
+| 8378563200 | 2016-04-25T00:00:00 |                     1 |                    388 |                402 |             2 |
+| 4702921684 | 2016-05-07T00:00:00 |                     1 |                    520 |                543 |             2 |
+Hence, we need to remove three rows in total from this table.
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894
