@@ -114,7 +114,9 @@ And we can actually find duplicates in `sleep_day` table:
 | 4388161847 | 2016-05-05T00:00:00 |                     1 |                    471 |                495 |             2 |
 | 8378563200 | 2016-04-25T00:00:00 |                     1 |                    388 |                402 |             2 |
 | 4702921684 | 2016-05-07T00:00:00 |                     1 |                    520 |                543 |             2 |
-Hence, we need to remove three rows in total from this table.
+
+Hence, we need to remove three rows in total from this table. To do this, we can go back temporarily to EXCEL, and by filtering for these rows we can easily delete the duplicates. I chose to do this in EXCEL, because we only have 3 rows to delete, but if we have more, it is better to use R.
+
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894
