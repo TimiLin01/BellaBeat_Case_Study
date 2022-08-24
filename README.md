@@ -37,15 +37,34 @@ So I stored the below files in BigQuery under the project **BellaBeat Case Study
 #### Credibility and Integrity
 To determine the credibility and integrity of the data I will use the **'ROCCC'** system:
   * **Reliability**: The data is **NOT** reliable, since we are not sure what is the marginal error, and a small sample size (~30 participants) has been used. So our analysis might not be true for the whole population.
-  * **Originality**: The data is **NOT** original, since it was collected by Amazon Mechanical Turk and has been made avaiable through MÖBIUS, but has been check against [1].
+  * **Originality**: The data is **NOT** original, since it was collected by Amazon Mechanical Turk and has been made avaiable through MÖBIUS, but has been check against [[1]](#1).
   * **Comprehensiveness**: The data is **NOT** comprehensive, because we have no information regarding whether our sample are randomly collected our not. This might lead to biasness.
   * **Current**: The data is **NOT** current, since it was collected in 2016. Therefore our analysis cannot represent the current trend in smart device usage.
   * **Cited**: It is cited. <br />
 As a result, our data do not satisfies the 'ROCCC' system. This means that using this dataset, we are **unable** to provide realiable and comprehensive recommendations for BellaBeats. Hence, our analysis can only act as directions which should be verified through a more reliable dataset.
 
 ## Processing Data
-#### Uploading Data
+#### Uploading and Transforming Data
+When I tried to upload the abouve CSV files into BigQuery, only the schema for *'dailyIntensities_merged.csv'* can be dedected automatically. For other files, the below error occur:
+```
+Failed to create table: Error while reading data, error message: Could not parse '4/12/2016 12:00:00 AM' as TIMESTAMP for field ActivityHour (position 1) starting at location 26 with message 'Invalid time zone: AM'
+```
+Therefore, I had to define the schema for them manually, and let `ActivityHour` temporary be `STRING` instead of `TIMESTAMP`. <br />
+Now, having the files uploaded. I checked the datatypes for each table. Since, we temporarily set the `ActivityHour/Time/SleepDay` as `STING` for some tables, we can now set them as `DATETIME` using the following code:
+```sql
+--eg. For heartrate table
+CREATE OR REPLACE TABLE `bellabeat-timilin.Fit_Data.heartrate`
+AS
 
+SELECT 
+      Id,
+      PARSE_DATETIME("%m/%d/%Y %l:%M:%S %p",Time) AS Time,
+      Value
+
+ FROM 
+     `bellabeat-timilin.Fit_Data.heartrate` 
+```
+And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_step`, `sleep_day` and `weight_log` tables.
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894
