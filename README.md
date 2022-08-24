@@ -69,43 +69,46 @@ And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_ste
 First, we check whether there is any NULL Value in our dataset:
 ```sql
 -- eg. For daily_activity table
-SELECT *
-FROM `bellabeat-timilin.Fit_Data.daily_activity`
+SELECT
+      *
+FROM
+      `bellabeat-timilin.Fit_Data.daily_activity`
 WHERE
-  Id IS NULL OR
-  ActivityDate IS NULL OR
-  TotalSteps IS NULL OR
-  TotalDistance IS NULL OR
-  TrackerDistance	IS NULL OR
-  LoggedActivitiesDistance IS NULL OR
-  VeryActiveDistance	IS NULL OR
-  ModeratelyActiveDistance	IS NULL OR
-  LightActiveDistance	IS NULL OR
-  SedentaryActiveDistance	IS NULL OR
-  VeryActiveMinutes	IS NULL OR
-  FairlyActiveMinutes	IS NULL OR
-  LightlyActiveMinutes	IS NULL OR	
-  SedentaryMinutes	IS NULL OR
-  Calories	IS NULL
+      Id IS NULL OR
+      ActivityDate IS NULL OR
+      TotalSteps IS NULL OR
+      TotalDistance IS NULL OR
+      TrackerDistance	IS NULL OR
+      LoggedActivitiesDistance IS NULL OR
+      VeryActiveDistance	IS NULL OR
+      ModeratelyActiveDistance	IS NULL OR
+      LightActiveDistance	IS NULL OR
+      SedentaryActiveDistance	IS NULL OR
+      VeryActiveMinutes	IS NULL OR
+      FairlyActiveMinutes	IS NULL OR
+      LightlyActiveMinutes	IS NULL OR	
+      SedentaryMinutes	IS NULL OR
+      Calories	IS NULL
 ```
 We only found NULL Values in `weight_log` table, under the `Fat` column. These NULL Values can be ignored if we do not want to use information regarding users' fat. <br />
 Next, we search for any duplicates:
 ```sql
 -- eg. For sleep_day table
 SELECT 
-  Id,
-  Time,
-  TotalSleepRecords,
-  TotalMinutesAsleep,
-  TotalTimeInBed,
-  COUNT(*) AS No_Of_Dup
-FROM `bellabeat-timilin.Fit_Data.sleep_day`
+      Id,
+      Time,
+      TotalSleepRecords,
+      TotalMinutesAsleep,
+      TotalTimeInBed,
+      COUNT(*) AS No_Of_Dup
+FROM
+     `bellabeat-timilin.Fit_Data.sleep_day`
 GROUP BY
-  Id,
-  Time,
-  TotalSleepRecords,
-  TotalMinutesAsleep,
-  TotalTimeInBed
+     Id,
+     Time,
+     TotalSleepRecords,
+     TotalMinutesAsleep,
+     TotalTimeInBed
 HAVING No_Of_Dup > 1
 ```
 And we can actually find duplicates in `sleep_day` table:
@@ -115,7 +118,13 @@ And we can actually find duplicates in `sleep_day` table:
 | 8378563200 | 2016-04-25T00:00:00 |                     1 |                    388 |                402 |             2 |
 | 4702921684 | 2016-05-07T00:00:00 |                     1 |                    520 |                543 |             2 |
 
-Hence, we need to remove three rows in total from this table. To do this, we can go back temporarily to EXCEL, and by filtering for these rows we can easily delete the duplicates. I chose to do this in EXCEL, because we only have 3 rows to delete, but if we have more, it is better to use R.
+Hence, we need to remove three rows in total from this table. To do this, we can go back temporarily to EXCEL, and by filtering for these rows we can easily delete the duplicates. I chose to do this in EXCEL, because we only have 3 rows to delete, but if we have more, it is better to use R. <br />
+This gives a new table:
+|   **Table Name**  |       **CSV File Name**       |       **Discription**        |
+|:-----------------:|:-----------------------------:|:-----------------------------|
+|  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
+
+## Analyzing Data
 
 
 ## Refrence
