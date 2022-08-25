@@ -125,6 +125,9 @@ This gives a new table:
 |  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
 
 ## Analyzing Data
+### Checking the # of users
+Before we start analyzing our data, it is always good to make sure how many unique IDs are in different tables. Because not all the participants answers all the questions.
+
 ### Average Steps VS Average Active Minutes
 The Centers for Disease Control and Prevention (CDC) suggest that an adult should aim for 10000 steps per day [[2]](#2). But recently. there are also many articles says that 7000 steps is already enough. Therefore, we can first investigate on average how many user walks more than 7000 steps a day on average.
 ```sql
@@ -137,7 +140,7 @@ GROUP BY
       Id
 HAVING daily_avg_step > 7000
 ```
-This give us back 20 users out of 33, that is 60.6%
+This give us back 20 users out of 33, that is 60.6% of our sample population.
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
