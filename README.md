@@ -3,23 +3,23 @@
 ![bellabeat](https://user-images.githubusercontent.com/72343428/185792124-e7fe7db9-b2e6-47c8-bdcf-55da42c3b54f.png)
 
 ## Introduction
-#### Company Background
+### Company Background
 BellaBeat was founded by Urška Sršen and Sandro Mur in 2013. It is a high-tech company that manufactures health-focused smart products, and collects data on activity, sleep, stress and reproductive health of its customers in order to provide information regarding their health and habits.
 
 ## Ask
-#### Business Task
+### Business Task
 Identifying the trends in smart device usage and provide recommendations that will help skateholders to make data-driven decisions regarding the marketing strategy and discover new potentials for the company.
-#### Key Stakeholders
+### Key Stakeholders
  * Urška Sršen: BellaBeat Co-founder and Chief Creative Officer (CCO)
  * Sandro Mur: Mathematician, BellaBeat Co-founder and Chief Executive Officer (CEO)
  * BellaBeat Marketing Team
 
 ## Prepare
-#### About the Data
+### About the Data
 The dataset[[1]](#1) I used is *FitBit Fitness Tracker Data*, which is avaiable on Kaggle provided by MÖBIUS. <br />
 It is collected from eligible Fitbit users, who consented to the submission of personal tracker data via a survey distributed by Amazon Mechanical Turk between 03.12.2016 - 05.12.2016.  <br />
 This dataset has overall 18 CSV files including information about minute-level output for physical activity, heart rate, weight and sleep monitoring between 04.12.2016 - 15.12.2016 (31 days period).
-#### Data Storage and Organization
+### Data Storage and Organization
 After downloading the dataset, I opened all the CSV file in spreadsheet (EXCEL) to see how are the data structured. <br />
 The dataset includes wide and narrow data. Each user has a unique ID, so that we can distinguish between them.
 I noticed that *'dailyCalories_merged.csv'*, *'dailyIntensities_merged.csv'* and *'dailySteps_merged.csv'* are all included in *'dailyActivity_merged.csv'*, so I decided not using these three files. <br />
@@ -34,7 +34,7 @@ So I stored the below files in BigQuery under the project **BellaBeat Case Study
 |     hourly_step    |    hourlySteps_merged.csv    | Hourly steps over 31 days of 33 users.                                                                            |
 |      sleep_day     |      sleepDay_merged.csv     | 24 users' sleeping info over 31 days, including total sleep records, total minutes asleep and total time in bed.  |
 |     weight_log     |   weightLogInfo_merged.csv   | 8 users' weight in Kg and Pounds, and their BMI, Fat, Manual Entry or not recorded in a day, over 31 days.        |
-#### Credibility and Integrity
+### Credibility and Integrity
 To determine the credibility and integrity of the data I will use the **'ROCCC'** system:
   * **Reliability**: The data is **NOT** reliable, since we are not sure what is the marginal error, and a small sample size (~30 participants) has been used. So our analysis might not be true for the whole population.
   * **Originality**: The data is **NOT** original, since it was collected by Amazon Mechanical Turk and has been made avaiable through MÖBIUS, but has been check against [[1]](#1).
@@ -44,7 +44,7 @@ To determine the credibility and integrity of the data I will use the **'ROCCC'*
 As a result, our data do not satisfies the 'ROCCC' system. This means that using this dataset, we are **unable** to provide realiable and comprehensive recommendations for BellaBeats. Hence, our analysis can only act as directions which should be verified through a more reliable dataset.
 
 ## Processing Data
-#### Uploading and Transforming Data
+### Uploading and Transforming Data
 When I tried to upload the abouve CSV files into BigQuery, only the schema for *'dailyIntensities_merged.csv'* can be dedected automatically. For other files, the below error occur:
 ```
 Failed to create table: Error while reading data, error message: Could not parse '4/12/2016 12:00:00 AM' as TIMESTAMP for field ActivityHour (position 1) starting at location 26 with message 'Invalid time zone: AM'
@@ -125,7 +125,22 @@ This gives a new table:
 |  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
 
 ## Analyzing Data
-
+### Average Steps VS Average Active Minutes
+The Centers for Disease Control and Prevention (CDC) suggest that an adult should aim for 10000 steps per day [[2]](#2). But recently. there are also many articles says that 7000 steps is already enough. Therefore, we can first investigate on average how many user walks more than 7000 steps a day on average.
+```sql
+SELECT 
+      DISTINCT Id,
+      AVG(TotalSteps) AS daily_avg_step
+FROM
+      `bellabeat-timilin.Fit_Data.daily_activity`
+GROUP BY
+      Id
+HAVING daily_avg_step > 7000
+```
+This give us back 20 users out of 33, that is 60.6%
 
 ## Refrence
-<a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894
+<a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
+<a id="2">[2]</a> Centers for Disease Control and Prevention (CDC). Stepping Up to Physcial Activity. Lifestyle Coach Facilitation Guide: Post-Core https://www.cdc.gov/diabetes/prevention/pdf/postcurriculum_session8.pdf <br />
+<a id="3">[3]</a> Bumgardner, W. "Why Your Fitbit Active Minutes Mean More Than Your Steps [2020-06-23]." https://www.verywellfit.com/why-active-minutes-mean-more-than-steps-4155747 <br />
+<a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099
