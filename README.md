@@ -127,20 +127,50 @@ This gives a new table:
 ## Analyzing Data
 ### Checking the # of users
 Before we start analyzing our data, it is always good to make sure how many unique IDs are in different tables. Because not all the participants answers all the questions.
+```sql
+-- eg. For daily_activity table
+SELECT
+    COUNT(DISTINCT Id) AS No_of_users
+FROM `bellabeat-timilin.Fit_Data.daily_activity`
+```
+|  **Table Name** | daily_activity | heartrate | hourly_cal | hourly_intensities | hourly_step | sleep_day_new | weight_log |
+|:---------------:|:--------------:|:---------:|:----------:|:------------------:|:-----------:|:-------------:|:----------:|
+| **No_of_users** |       33       |     14    |     33     |         33         |      33     |       24      |      8     |
 
 ### Average Steps VS Average Active Minutes
-The Centers for Disease Control and Prevention (CDC) suggest that an adult should aim for 10000 steps per day [[2]](#2). But recently. there are also many articles says that 7000 steps is already enough. Therefore, we can first investigate on average how many user walks more than 7000 steps a day on average.
+The Centers for Disease Control and Prevention (CDC) suggest that an adult should aim for 10000 steps per day [[2]](#2). But recently, there are also many articles says that 7000 steps is already enough. Therefore, we can first investigate on average how many user walks more than 7000 steps a day on average.
 ```sql
 SELECT 
       DISTINCT Id,
-      AVG(TotalSteps) AS daily_avg_step
+      ROUND(AVG(TotalSteps),3) AS daily_avg_step
 FROM
       `bellabeat-timilin.Fit_Data.daily_activity`
 GROUP BY
       Id
-HAVING daily_avg_step > 7000
+HAVING daily_avg_step >= 7000
 ```
-This give us back 20 users out of 33, that is 60.6% of our sample population.
+This give us back 20 users out of 33, that is *60.6%* of our sample population. <br />
+However, does having more steps means that you were more active than others who has less steps? Not necessarily, since step numbers can be faked. Therefore, it is better for us to look at the active minutes. <br />
+An adult should aim for at least 30 "active minutes" per day [[3]](#3). But how can we link this with our dataset? Actually, Fitbit measures active minutes, but in our data, it is splitted into "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes" and "SedentaryMinutes". And the "active minutes" we want to measure is indeed "VeryActiveMinutes" + "FairlyActiveMinutes" = "Active Minutes" [[4]](#4). <br />
+Therefore, to gain the average active minutes:
+```sql
+SELECT 
+      DISTINCT Id,
+      ROUND(AVG(TotalSteps),3) AS daily_avg_step,
+      ROUND(AVG(VeryActiveMinutes+FairlyActiveMinutes),3) AS daily_avg_minute
+FROM 
+      `bellabeat-timilin.Fit_Data.daily_activity`
+GROUP BY
+      Id
+HAVING 
+      daily_avg_step >= 7000 OR
+      daily_avg_minute >= 30
+```
+And this time we get back 21 users out of 33, which is *63.6%*. Moreover, we can also find such user, whose average step and average active minutes differ a lot, and might lead us to different conclusion. <br />
+For example:
+|     **Id**    | **Average Daily Steps** | **Average Daily Active Minutes** |
+|:-------------:|:-----------------------:|:--------------------------------:|
+|  6117666160   |         7046.714        |              3.607               |
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
