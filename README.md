@@ -172,8 +172,27 @@ For example:
 |:-------------:|:-----------------------:|:--------------------------------:|
 |  6117666160   |         7046.714        |              3.607               |
 
+### During the week
+After checking the daily averages, we can also investigate about on which days during the week, users are more active or complete their daily step goal. <br />
+*See code in the Appendix*
+| **Weekday** | **Average Total Step** | **Average Active Minutes** | **No_of_Users** |
+|:-----------:|:----------------------:|:--------------------------:|:---------------:|
+|    Sunday   |        6933.231        |           34.512           |       121       |
+|    Monday   |        7780.867        |           37.108           |       120       |
+|   Tuesday   |        8125.007        |           37.289           |       152       |
+|  Wednesday  |        7559.373        |            33.88           |       150       |
+|   Thursday  |        7405.837        |           31.367           |       147       |
+|    Friday   |         7448.23        |           32.167           |       126       |
+|   Saturday  |        8152.976        |           37.121           |       124       |
+
+We can see that except of Sunday, on other days, users on average completes their daily step goal. But if we lookat the average active minutes, then the minumum 30 active minutes is achieved on the whole week. One possibility for this situation might be, people tend to stay at home on Sunday, but they still do some exercise to kepp fit. <br />
+Overall, users on average walk the most on Tuesday and Saturday, and their average active minutes are the highest on these two days as well.
+
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
 <a id="2">[2]</a> Centers for Disease Control and Prevention (CDC). Stepping Up to Physcial Activity. Lifestyle Coach Facilitation Guide: Post-Core https://www.cdc.gov/diabetes/prevention/pdf/postcurriculum_session8.pdf <br />
 <a id="3">[3]</a> Bumgardner, W. "Why Your Fitbit Active Minutes Mean More Than Your Steps [2020-06-23]." https://www.verywellfit.com/why-active-minutes-mean-more-than-steps-4155747 <br />
 <a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099
+
+## Appendix
+For whole sql code, check the txt files.
