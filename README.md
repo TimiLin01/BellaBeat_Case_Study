@@ -36,7 +36,7 @@ So I stored the below files in BigQuery under the project **BellaBeat Case Study
 ### Credibility and Integrity
 To determine the credibility and integrity of the data, I will use the **'ROCCC'** system:
   * **Reliability**: The data is **not** reliable since we are not sure what the marginal error is, and a small sample size (~30 participants) has been used. So our analysis might not be true for the whole population.
-  * **Originality**: The data is **not** original since it was collected by Amazon Mechanical Turk and made available through MÖBIUS, but has been checked against [[1]](#1).
+  * **Originality**: The data is **not** original since it was collected by Amazon Mechanical Turk and made available through MÖBIUS but has been checked against [[1]](#1).
   * **Comprehensiveness**: The data is **not** comprehensive because we have no information regarding whether our samples are randomly collected or not. This might lead to bias.
   * **Current**: The data is **not** current since it was collected in 2016. Therefore our analysis cannot represent the current trend in smart device usage.
   * **Cited**: It is cited. <br />
@@ -44,23 +44,21 @@ As a result, our data do not satisfy the 'ROCCC' system. This means that using t
 
 ## Processing Data
 ### Uploading and Transforming Data
-When I tried to upload the abouve CSV files into BigQuery, only the schema for *'dailyIntensities_merged.csv'* can be dedected automatically. For other files, the below error occur:
+When I tried to upload the above CSV files into BigQuery, only the schema for *'dailyIntensities_merged.csv'* could be detected automatically. For other files, the below error occurs:
 ```
 Failed to create table: Error while reading data, error message: Could not parse '4/12/2016 12:00:00 AM' as TIMESTAMP for field ActivityHour (position 1) starting at location 26 with message 'Invalid time zone: AM'
 ```
-Therefore, I had to define the schema for them manually, and let `ActivityHour` temporary be `STRING` instead of `TIMESTAMP`. <br />
-Now, having the files uploaded. I checked the datatypes for each table. Since, we temporarily set the `ActivityHour/Time/SleepDay` as `STING` for some tables, we can now set them as `DATETIME` using the following code:
+Therefore, I had to manually define the schema for them and let `ActivityHour` temporarily be `STRING` instead of `TIMESTAMP`. <br />
+Now, having the files uploaded. I checked the datatypes for each table. Since we temporarily set the `ActivityHour/Time/SleepDay` as `STING` for some tables, we can now set them as `DATETIME` using the following code:
 ```sql
 -- eg. For heartrate table
 CREATE OR REPLACE TABLE `bellabeat-timilin.Fit_Data.heartrate`
 AS
-
 SELECT 
       Id,
       PARSE_DATETIME("%m/%d/%Y %l:%M:%S %p",Time) AS Time,
       Value
-
- FROM 
+FROM 
      `bellabeat-timilin.Fit_Data.heartrate` 
 ```
 And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_step`, `sleep_day` and `weight_log` tables.
@@ -89,7 +87,7 @@ WHERE
       SedentaryMinutes	IS NULL OR
       Calories	IS NULL
 ```
-We only found NULL Values in `weight_log` table, under the `Fat` column. These NULL Values can be ignored if we do not want to use information regarding users' fat. <br />
+We only found NULL Values in the `weight_log` table, under the `Fat` column. These NULL Values can be ignored if we do not want to use information regarding users' fat. <br />
 Next, we search for any duplicates:
 ```sql
 -- eg. For sleep_day table
@@ -110,22 +108,22 @@ GROUP BY
      TotalTimeInBed
 HAVING No_Of_Dup > 1
 ```
-And we can actually find duplicates in `sleep_day` table:
+And we can actually find duplicates in the `sleep_day` table:
 |   **Id**   |       **Time**      | **TotalSleepRecords** | **TotalMinutesAsleep** | **TotalTimeInBed** | **No_Of_Dup** |
 |:----------:|:-------------------:| ---------------------:| ----------------------:| ------------------:| -------------:|
 | 4388161847 | 2016-05-05T00:00:00 |                     1 |                    471 |                495 |             2 |
 | 8378563200 | 2016-04-25T00:00:00 |                     1 |                    388 |                402 |             2 |
 | 4702921684 | 2016-05-07T00:00:00 |                     1 |                    520 |                543 |             2 |
 
-Hence, we need to remove three rows in total from this table. To do this, we can go back temporarily to EXCEL, and by filtering for these rows we can easily delete the duplicates. I chose to do this in EXCEL, because we only have 3 rows to delete, but if we have more, it is better to use R. <br />
+Hence, we need to remove three rows in total from this table. To do this, we can go back temporarily to EXCEL, and by filtering for these rows, we can easily delete the duplicates. I chose to do this in EXCEL because we only have three rows to delete, but if we have more, it is better to use R. <br />
 This gives a new table:
 |   **Table Name**  |       **CSV File Name**       |       **Discription**        |
 |:-----------------:|:-----------------------------:|:-----------------------------|
 |  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
 
-## Analyzing Data
+## Analysing Data
 ### Checking the # of users
-Before we start analyzing our data, it is always good to make sure how many unique IDs are in different tables. Because not all the participants answers all the questions.
+Before we start analysing our data, it is always good to ensure how many unique IDs are in different tables because not all participants answer all the questions.
 ```sql
 -- eg. For daily_activity table
 SELECT
@@ -137,7 +135,7 @@ FROM `bellabeat-timilin.Fit_Data.daily_activity`
 | **No_of_users** |       33       |     14    |     33     |         33         |      33     |       24      |      8     |
 
 ### Average Steps VS Average Active Minutes
-The Centers for Disease Control and Prevention (CDC) suggest that an adult should aim for 10000 steps per day [[2]](#2). But recently, there are also many articles says that 7000 steps is already enough. Therefore, we can first investigate on average how many user walks more than 7000 steps a day on average.
+The Centers for Disease Control and Prevention (CDC) suggest that adults should aim for 10000 steps per day [[2]](#2). But recently, many articles have also said that 7000 steps are already enough. Therefore, we can first investigate how many users walk more than 7000 steps a day on average.
 ```sql
 SELECT 
       DISTINCT Id,
@@ -148,9 +146,9 @@ GROUP BY
       Id
 HAVING daily_avg_step >= 7000
 ```
-This give us back 20 users out of 33, that is *60.6%* of our sample population. <br />
+This gives us back 20 users out of 33, which is *60.6%* of our sample population. <br />
 However, does having more steps means that you were more active and did more sport than others who completed fewer steps? Not necessarily, since step numbers can be faked. Therefore, we should look at the active minutes. <br />
-An adult should aim for at least 30 "active minutes" per day [[3]](#3). But how can we link this with our dataset? Actually, Fitbit measures active minutes, but in our data, it is splitted into "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes" and "SedentaryMinutes". And the "active minutes" we want to measure is indeed "VeryActiveMinutes" + "FairlyActiveMinutes" = "Active Minutes" [[4]](#4). <br />
+An adult should aim for at least 30 "active minutes" per day [[3]](#3). But how can we link this with our dataset? Actually, Fitbit measures active minutes, but in our data, it is split into "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes" and "SedentaryMinutes". And the "active minutes" we want to measure is indeed "VeryActiveMinutes" + "FairlyActiveMinutes" = "Active Minutes" [[4]](#4). <br />
 Therefore, to gain the average active minutes:
 ```sql
 SELECT 
@@ -165,14 +163,14 @@ HAVING
       daily_avg_step >= 7000 OR
       daily_avg_minute >= 30
 ```
-And this time we get back 21 users out of 33, which is *63.6%*. Moreover, we can also find such user, whose average step and average active minutes differ a lot, and might lead us to different conclusion. <br />
+And this time we get back 21 users out of 33, which is *63.6%*. Moreover, we can also find users whose average step and average active minutes differ a lot, which might lead us to different conclusions. <br />
 For example:
 |     **Id**    | **Average Daily Steps** | **Average Daily Active Minutes** |
 |:-------------:|:-----------------------:|:--------------------------------:|
 |  6117666160   |         7046.714        |              3.607               |
 
 ### During the week
-After checking the daily averages, we can also investigate about on which days during the week, users are more active or complete their daily step goal. <br />
+After checking the daily averages, we can also investigate which days during the week users are more active or complete their daily step goal. <br />
 *See code in the Appendix*
 | **Weekday** | **Average Total Step** | **Average Active Minutes** | **No_of_Users** |
 |:-----------:|:----------------------:|:--------------------------:|:---------------:|
@@ -184,10 +182,12 @@ After checking the daily averages, we can also investigate about on which days d
 |    Friday   |         7448.23        |           32.167           |       126       |
 |   Saturday  |        8152.976        |           37.121           |       124       |
 
-We can see that except of Sunday, on other days, users on average completes their daily step goal. But if we lookat the average active minutes, then the minumum 30 active minutes is achieved on the whole week. One possibility for this situation might be, people tend to stay at home on Sunday, but they still do some exercise to kepp fit. <br />
+We can see that except for Sunday, users complete their daily step goals on average. But if we look at the average active minutes, the minimum 30 active minutes is achieved throughout the week. One possibility for this situation might be that people tend to stay at home on Sunday, but they still do some exercise to keep fit. <br />
 Overall, users on average walk the most on Tuesday and Saturday, and their average active minutes are the highest on these two days as well.
 
 ### Active Hours
+We can go even deeper by checking on which hours during the day people are the most active.
+
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
