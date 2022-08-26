@@ -187,7 +187,31 @@ Overall, users on average walk the most on Tuesday and Saturday, and their avera
 
 ### Active Hours
 We can go even deeper by checking on which hours during the day people are the most active.
-
+```sql
+SELECT
+      DISTINCT Hours,
+      ROUND(AVG(StepTotal),3) AS hourly_avg_step,
+      COUNT(Id) AS No_of_user
+FROM
+(SELECT
+       Hours,
+       StepTotal,
+       Id
+ FROM(
+      SELECT
+            EXTRACT(HOUR FROM Time) AS Hours,
+            StepTotal,
+            Id
+      FROM
+          `bellabeat-timilin.Fit_Data.hourly_step`
+     )
+)
+GROUP BY
+        Hours
+ORDER BY
+        Hours
+```
+We found that the `hourly_avg_step`
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
