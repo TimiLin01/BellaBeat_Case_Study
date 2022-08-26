@@ -4,11 +4,11 @@
 
 ## Introduction
 ### Company Background
-BellaBeat was founded by Urška Sršen and Sandro Mur in 2013. It is a high-tech company that manufactures health-focused smart products, and collects data on activity, sleep, stress and reproductive health of its customers in order to provide information regarding their health and habits.
+BellaBeat was founded by Urška Sršen and Sandro Mur in 2013. It is a high-tech company that manufactures health-focused smart products and collects data on the activity, sleeps, stress and reproductive health of its customers in order to provide information regarding their health and habits.
 
 ## Ask
 ### Business Task
-Identifying the trends in smart device usage and provide recommendations that will help skateholders to make data-driven decisions regarding the marketing strategy and discover new potentials for the company.
+Identifying the trends in smart device usage and providing recommendations that can help stakeholders to make data-driven decisions regarding the marketing strategy and discover new potentials for the company.
 ### Key Stakeholders
  * Urška Sršen: BellaBeat Co-founder and Chief Creative Officer (CCO)
  * Sandro Mur: Mathematician, BellaBeat Co-founder and Chief Executive Officer (CEO)
@@ -16,14 +16,13 @@ Identifying the trends in smart device usage and provide recommendations that wi
 
 ## Prepare
 ### About the Data
-The dataset[[1]](#1) I used is *FitBit Fitness Tracker Data*, which is avaiable on Kaggle provided by MÖBIUS. <br />
-It is collected from eligible Fitbit users, who consented to the submission of personal tracker data via a survey distributed by Amazon Mechanical Turk between 03.12.2016 - 05.12.2016.  <br />
-This dataset has overall 18 CSV files including information about minute-level output for physical activity, heart rate, weight and sleep monitoring between 04.12.2016 - 15.12.2016 (31 days period).
+The dataset[[1]](#1) I used is FitBit Fitness Tracker Data, which is available on Kaggle and provided by MÖBIUS. <br />
+It is collected from eligible Fitbit users who consented to submit personal tracker data via a survey distributed by Amazon Mechanical Turk between 03.12.2016 - 05.12.2016. <br />
+This dataset has overall 18 CSV files, including information about the minute-level output for physical activity, heart rate, weight and sleep monitoring between 04.12.2016 - 15.12.2016 (31 days period).
 ### Data Storage and Organization
-After downloading the dataset, I opened all the CSV file in spreadsheet (EXCEL) to see how are the data structured. <br />
-The dataset includes wide and narrow data. Each user has a unique ID, so that we can distinguish between them.
-I noticed that *'dailyCalories_merged.csv'*, *'dailyIntensities_merged.csv'* and *'dailySteps_merged.csv'* are all included in *'dailyActivity_merged.csv'*, so I decided not using these three files. <br />
-I also discovered that some tables have too many rows, hence using hte BigQuery to analyse the data will be a better choice than spreadsheet. <br />
+After downloading the dataset, I opened all the CSV files in the spreadsheet (EXCEL) to see how are the data structured. <br />
+The dataset includes wide and narrow data. Each user has a unique ID so that we can distinguish between them. I noticed that 'dailyCalories_merged.csv', 'dailyIntensities_merged.csv' and 'dailySteps_merged.csv' are all included in 'dailyActivity_merged.csv', so I decided not to use these three files. <br />
+I also discovered that some tables have too many rows. Hence using BigQuery to analyse the data will be a better choice than the spreadsheet. <br />
 So I stored the below files in BigQuery under the project **BellaBeat Case Study** (ID: `bellabeat-timilin`), dataset **Fit-Data**:
 |   **Table Name**   |       **CSV File Name**      |                                                  **Discription**                                                  |
 |:------------------:|:----------------------------:|:-----------------------------------------------------------------------------------------------------------------|
@@ -35,13 +34,13 @@ So I stored the below files in BigQuery under the project **BellaBeat Case Study
 |      sleep_day     |      sleepDay_merged.csv     | 24 users' sleeping info over 31 days, including total sleep records, total minutes asleep and total time in bed.  |
 |     weight_log     |   weightLogInfo_merged.csv   | 8 users' weight in Kg and Pounds, and their BMI, Fat, Manual Entry or not recorded in a day, over 31 days.        |
 ### Credibility and Integrity
-To determine the credibility and integrity of the data I will use the **'ROCCC'** system:
-  * **Reliability**: The data is **NOT** reliable, since we are not sure what is the marginal error, and a small sample size (~30 participants) has been used. So our analysis might not be true for the whole population.
-  * **Originality**: The data is **NOT** original, since it was collected by Amazon Mechanical Turk and has been made avaiable through MÖBIUS, but has been check against [[1]](#1).
-  * **Comprehensiveness**: The data is **NOT** comprehensive, because we have no information regarding whether our sample are randomly collected our not. This might lead to biasness.
-  * **Current**: The data is **NOT** current, since it was collected in 2016. Therefore our analysis cannot represent the current trend in smart device usage.
+To determine the credibility and integrity of the data, I will use the **'ROCCC'** system:
+  * **Reliability**: The data is **not** reliable since we are not sure what the marginal error is, and a small sample size (~30 participants) has been used. So our analysis might not be true for the whole population.
+  * **Originality**: The data is **not** original since it was collected by Amazon Mechanical Turk and made available through MÖBIUS, but has been checked against [[1]](#1).
+  * **Comprehensiveness**: The data is **not** comprehensive because we have no information regarding whether our samples are randomly collected or not. This might lead to bias.
+  * **Current**: The data is **not** current since it was collected in 2016. Therefore our analysis cannot represent the current trend in smart device usage.
   * **Cited**: It is cited. <br />
-As a result, our data do not satisfies the 'ROCCC' system. This means that using this dataset, we are **unable** to provide realiable and comprehensive recommendations for BellaBeats. Hence, our analysis can only act as directions which should be verified through a more reliable dataset.
+As a result, our data do not satisfy the 'ROCCC' system. This means that using this dataset, we are **unable** to provide reliable and comprehensive recommendations for BellaBeats. Hence, our analysis can only act as directions which should be verified through a more reliable dataset.
 
 ## Processing Data
 ### Uploading and Transforming Data
@@ -150,7 +149,7 @@ GROUP BY
 HAVING daily_avg_step >= 7000
 ```
 This give us back 20 users out of 33, that is *60.6%* of our sample population. <br />
-However, does having more steps means that you were more active than others who has less steps? Not necessarily, since step numbers can be faked. Therefore, it is better for us to look at the active minutes. <br />
+However, does having more steps means that you were more active and did more sport than others who completed fewer steps? Not necessarily, since step numbers can be faked. Therefore, we should look at the active minutes. <br />
 An adult should aim for at least 30 "active minutes" per day [[3]](#3). But how can we link this with our dataset? Actually, Fitbit measures active minutes, but in our data, it is splitted into "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes" and "SedentaryMinutes". And the "active minutes" we want to measure is indeed "VeryActiveMinutes" + "FairlyActiveMinutes" = "Active Minutes" [[4]](#4). <br />
 Therefore, to gain the average active minutes:
 ```sql
@@ -187,6 +186,8 @@ After checking the daily averages, we can also investigate about on which days d
 
 We can see that except of Sunday, on other days, users on average completes their daily step goal. But if we lookat the average active minutes, then the minumum 30 active minutes is achieved on the whole week. One possibility for this situation might be, people tend to stay at home on Sunday, but they still do some exercise to kepp fit. <br />
 Overall, users on average walk the most on Tuesday and Saturday, and their average active minutes are the highest on these two days as well.
+
+### Active Hours
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
