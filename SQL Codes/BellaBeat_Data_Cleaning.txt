@@ -1,0 +1,179 @@
+-----------Finding NULL Value-------------------
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.daily_activity`
+WHERE
+  Id IS NULL OR
+  ActivityDate IS NULL OR
+  TotalSteps IS NULL OR
+  TotalDistance IS NULL OR
+  TrackerDistance	IS NULL OR
+  LoggedActivitiesDistance IS NULL OR
+  VeryActiveDistance	IS NULL OR
+  ModeratelyActiveDistance	IS NULL OR
+  LightActiveDistance	IS NULL OR
+  SedentaryActiveDistance	IS NULL OR
+  VeryActiveMinutes	IS NULL OR
+  FairlyActiveMinutes	IS NULL OR
+  LightlyActiveMinutes	IS NULL OR	
+  SedentaryMinutes	IS NULL OR
+  Calories	IS NULL
+
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.heartrate`
+WHERE
+  Id IS NULL OR
+  Time IS NULL OR
+  Value IS NULL
+
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.hourly_cal`
+WHERE
+  Id IS NULL OR
+  Time IS NULL OR
+  Calories IS NULL
+
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.hourly_intensities`
+WHERE
+  Id IS NULL OR
+  Time IS NULL OR
+  TotalIntensity IS NULL OR
+  AverageIntensity IS NULL
+
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.hourly_step`
+WHERE
+  Id IS NULL OR
+  Time IS NULL OR
+  StepTotal IS NULL
+
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.sleep_day`
+WHERE
+  Id IS NULL OR
+  Time IS NULL OR
+  TotalSleepRecords IS NULL OR
+  TotalMinutesAsleep IS NULL OR
+  TotalTimeInBed IS NULL
+
+SELECT *
+FROM `bellabeat-timilin.Fit_Data.weight_log`
+WHERE
+  Id IS NULL OR
+  Time IS NULL OR
+  WeightKg IS NULL OR
+  WeightPounds IS NULL OR
+  Fat IS NULL OR
+  BMI IS NULL OR
+  IsManualReport IS NULL OR
+  LogId IS NULL
+
+--------------------Finding Duplicates--------------------
+SELECT 
+  Id,
+  ActivityDate,
+  TotalSteps,
+  TotalDistance,
+  TrackerDistance,
+  LoggedActivitiesDistance,
+  VeryActiveDistance,
+  ModeratelyActiveDistance,
+  LightActiveDistance,
+  SedentaryActiveDistance,
+  VeryActiveMinutes,
+  FairlyActiveMinutes,
+  LightlyActiveMinutes,	
+  SedentaryMinutes,
+  Calories,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.daily_activity`
+GROUP BY
+  Id,
+  ActivityDate,
+  TotalSteps,
+  TotalDistance,
+  TrackerDistance,
+  LoggedActivitiesDistance,
+  VeryActiveDistance,
+  ModeratelyActiveDistance,
+  LightActiveDistance,
+  SedentaryActiveDistance,
+  VeryActiveMinutes,
+  FairlyActiveMinutes,
+  LightlyActiveMinutes,	
+  SedentaryMinutes,
+  Calories
+HAVING No_Of_Dup > 1
+
+SELECT 
+  Id,
+  Time,
+  Value,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.heartrate`
+GROUP BY
+  Id,
+  Time,
+  Value
+HAVING No_Of_Dup > 1
+
+SELECT 
+  Id,
+  Time,
+  Calories,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.hourly_cal`
+GROUP BY
+  Id,
+  Time,
+  Calories
+HAVING No_Of_Dup > 1
+
+SELECT 
+  Id,
+  Time,
+  TotalIntensity,
+  AverageIntensity,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.hourly_intensities`
+GROUP BY
+  Id,
+  Time,
+  TotalIntensity,
+  AverageIntensity
+HAVING No_Of_Dup > 1
+
+SELECT 
+  Id,
+  Time,
+  StepTotal,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.hourly_step`
+GROUP BY
+  Id,
+  Time,
+  StepTotal
+HAVING No_Of_Dup > 1
+
+SELECT 
+  Id,
+  Time,
+  WeightKg,
+  WeightPounds,
+  Fat,
+  BMI,
+  IsManualReport,
+  LogId,
+  COUNT(*) AS No_Of_Dup
+FROM `bellabeat-timilin.Fit_Data.weight_log`
+GROUP BY
+  Id,
+  Time,
+  WeightKg,
+  WeightPounds,
+  Fat,
+  BMI,
+  IsManualReport,
+  LogId
+HAVING No_Of_Dup > 1
+
