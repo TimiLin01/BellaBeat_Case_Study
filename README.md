@@ -133,7 +133,6 @@ FROM `bellabeat-timilin.Fit_Data.daily_activity`
 |  **Table Name** | daily_activity | heartrate | hourly_cal | hourly_intensities | hourly_step | sleep_day_new | weight_log |
 |:---------------:|:--------------:|:---------:|:----------:|:------------------:|:-----------:|:-------------:|:----------:|
 | **No_of_users** |       33       |     14    |     33     |         33         |      33     |       24      |      8     |
-
 ### Average Steps VS Average Active Minutes
 The Centers for Disease Control and Prevention (CDC) suggest that adults should aim for 10000 steps per day [[2]](#2). But recently, many articles have also said that 7000 steps are already enough. Therefore, we can first investigate how many users walk more than 7000 steps a day on average.
 ```sql
@@ -168,8 +167,7 @@ For example:
 |     **Id**    | **Average Daily Steps** | **Average Daily Active Minutes** |
 |:-------------:|:-----------------------:|:--------------------------------:|
 |  6117666160   |         7046.714        |              3.607               |
-
-### During the week
+#### During the week
 After checking the daily averages, we can also investigate which days during the week users are more active or complete their daily step goal. <br />
 *See code in the Appendix*
 | **Weekday** | **Average Total Step** | **Average Active Minutes** | **No_of_Users** |
@@ -184,8 +182,7 @@ After checking the daily averages, we can also investigate which days during the
 
 We can see that except for Sunday, users complete their daily step goals on average. But if we look at the average active minutes, the minimum 30 active minutes is achieved throughout the week. One possibility for this situation might be that people tend to stay at home on Sunday, but they still do some exercise to keep fit. <br />
 Overall, users on average walk the most on Tuesday and Saturday, and their average active minutes are the highest on these two days as well.
-
-### Active Hours
+#### During the day
 We can go even deeper by checking on which hours during the day people are the most active.
 ```sql
 SELECT
@@ -211,13 +208,19 @@ GROUP BY
 ORDER BY
         Hours
 ```
-We found that the `hourly_avg_step`
+We found that the `hourly_avg_step` increases a lot around 8 AM and reaches its peak of 599.17 at 6 PM.
+
+### Calories burnt
+The U.S. Department of Health and Human Services [[5]](#5) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight information. Therefore, we will only look at the average calories burnt during the day and week.
+#### During the week
+
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
 <a id="2">[2]</a> Centers for Disease Control and Prevention (CDC). Stepping Up to Physcial Activity. Lifestyle Coach Facilitation Guide: Post-Core https://www.cdc.gov/diabetes/prevention/pdf/postcurriculum_session8.pdf <br />
 <a id="3">[3]</a> Bumgardner, W. "Why Your Fitbit Active Minutes Mean More Than Your Steps [2020-06-23]." https://www.verywellfit.com/why-active-minutes-mean-more-than-steps-4155747 <br />
-<a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099
+<a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099 <br />
+<a id="5">[5]</a> U.S. Department of Health and Human Services. 2015–2020 Dietary Guidelines for Americans. https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines/previous-dietary-guidelines/2015
 
 ## Appendix
 For whole sql code, check the txt files.
