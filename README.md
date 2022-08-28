@@ -62,7 +62,7 @@ FROM
      `bellabeat-timilin.Fit_Data.heartrate` 
 ```
 And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_step`, `sleep_day` and `weight_log` tables. <br />
-*See code in the Appendix*
+*(See code in the Appendix)*
 
 ### Data Cleaning
 First, we check whether there is any NULL Value in our dataset:
@@ -123,7 +123,7 @@ This gives a new table:
 |:-----------------:|:-----------------------------:|:-----------------------------|
 |  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
 
-*See codes in the Appendix*
+*(See codes in the Appendix)*
 
 ## Analysing Data
 ### Checking the # of users
@@ -137,6 +137,8 @@ FROM `bellabeat-timilin.Fit_Data.daily_activity`
 |  **Table Name** | daily_activity | heartrate | hourly_cal | hourly_intensities | hourly_step | sleep_day_new | weight_log |
 |:---------------:|:--------------:|:---------:|:----------:|:------------------:|:-----------:|:-------------:|:----------:|
 | **No_of_users** |       33       |     14    |     33     |         33         |      33     |       24      |      8     |
+
+*(See code in the Appendix)*
 ### Average Steps VS Average Active Minutes
 The Centers for Disease Control and Prevention (CDC) suggest that adults should aim for 10000 steps per day [[2]](#2). But recently, many articles have also said that 7000 steps are already enough. Therefore, we can first investigate how many users walk more than 7000 steps a day on average.
 ```sql
@@ -173,7 +175,6 @@ For example:
 |  6117666160   |         7046.714        |              3.607               |
 #### During the week
 After checking the daily averages, we can also investigate which days during the week users are more active or complete their daily step goal. <br />
-*See code in the Appendix*
 | **Weekday** | **Average Total Step** | **Average Active Minutes** | **No_of_Users** |
 |:-----------:|:----------------------:|:--------------------------:|:---------------:|
 |    Sunday   |        6933.231        |           34.512           |       121       |
@@ -184,6 +185,7 @@ After checking the daily averages, we can also investigate which days during the
 |    Friday   |         7448.23        |           32.167           |       126       |
 |   Saturday  |        8152.976        |           37.121           |       124       |
 
+*(See code in the Appendix)* <br />
 We can see that except for Sunday, users complete their daily step goals on average. But if we look at the average active minutes, the minimum 30 active minutes is achieved throughout the week. One possibility for this situation might be that people tend to stay at home on Sunday, but they still do some exercise to keep fit. <br />
 Overall, users on average walk the most on Tuesday and Saturday, and their average active minutes are the highest on these two days as well.
 #### During the day
@@ -224,7 +226,7 @@ FROM
 GROUP BY
       Id
 ```
-We can see that each user's average calorie expenses range from 1483.355 to 3436.581 Cal. And what we can definitely say is that there are four users who on average did not burn enough calories, because their average calorie expenses are less than 1600 Cal. <br />
+We discovered that each user's average calorie expenses range from 1483.355 to 3436.581 Cal. And what we can definitely say is that there are four users who on average did not burn enough calories, because their average calorie expenses are less than 1600 Cal. <br />
 I also retrieved the average active minutes for each user, but at the moment we cannot see any obvious relationship between active minutes and calorie expense. We can keep these data and visualize them later so that we might see some correlation.
 #### During the day
 |        **AM**        |  **12** |  **1**  |  **2**  |  **3**  |  **4**  |  **5**  |   **6**   |  **7**  |  **8**  |  **9**  |  **10** |  **11** |
@@ -233,7 +235,7 @@ I also retrieved the average active minutes for each user, but at the moment we 
 |        **PM**        |  **12** |  **1**  |  **2**  |  **3**  |  **4**  |  **5**  |   **6**   |  **7**  |  **8**  |  **9**  |  **10** |  **11** |
 | **Average Calories** | 117.197 | 115.309 | 115.733 | 106.637 | 113.327 | 122.753 | *123.492* | 121.485 | 102.358 |  96.056 |  88.265 |  77.594 |
 
-*See code in the Appendix* <br />
+*(See code in the Appendix)* <br />
 We found out that on average the highest calories of 123.492 Cal were burnt around 6 PM and the lowest of 67.538 Cal around 3 AM.
 
 ### Heart Rate
@@ -249,10 +251,10 @@ FROM
 GROUP BY
       Id
 ```
-We can see that all 14 users have an average heart rate between 60 and 100 bpm. We can also discover that most of the users have a minimum heart rate of around or even under 40 bpm, this is not a big concern for healthy young adults and trained athletes, since they commonly have 40 - 60 bpm during sleep and rest. But for a general adult heart rate under 60 bpm is qualified as bradycardia. <br />
+All 14 users have an average heart rate between 60 and 100 bpm. We can also discover that most of the users have a minimum heart rate of around or even under 40 bpm, this is not a big concern for healthy young adults and trained athletes, since they commonly have 40 - 60 bpm during sleep and rest. But for a general adult heart rate under 60 bpm is qualified as bradycardia. <br />
 There are many records of a maximum heart rate exceeding 100 bpm, which can be qualified as tachycardia but can also be acceptable if the user was doing physical exercise. However, some records can be dangerous even if the user was doing exercise. For instance, *user 2022484408* reached 203 bpm, which can be the estimated maximum age-related heart rate for a 17-year-old (220 - 203 = 17) user, but is still dangerous even if he/she was doing vigorous-intensity physical activity. <br />
 By assuming users sleep between 10 PM and 6 AM, we can look for their average heart rate during their sleep. Luckily, most of them have an average between 60 and 100 bpm, only two users had around 54 and 58 bpm. <br />
-*See code in the Appendix*
+*(See code in the Appendix)*
 
 ### Sleep
 According to the Centers for Disease Control and Prevention (CDC), the recommended hours of sleep per day changes as the user age. In general, an adult needs 7 - 9 hours of sleep a day. So let's find out the average sleeping hours for each user.
@@ -276,18 +278,21 @@ There are only 10 out of 24 users (*41.6%*) sleep 7 - 9 hours on average, 1 out 
 ### Weight, BMI and Height
 As we said before, we only have the weight and BMI information of only 8 users. We can use the below equation to calculate the height of the users: <br />
 <p align="center"><img width="298" alt="bellabeat-bmi" src="https://user-images.githubusercontent.com/72343428/187093390-17f4d125-e093-4edd-9ba5-1bfe51ad7c62.png"></p>
-So for each user, we get: <br />
+
+So for each user, we get:
 
 |   **Id**   | **Average Height(cm)** | **Average Weight(kg)** | **Average BMI** |
-|:----------:|-----------------------:|-----------------------:|----------------:|
-| 4558609924 |                  160.0 |                  69.64 |          27.214 |
-| 4319703577 |                  162.5 |                  72.35 |          27.415 |
-| 1503960366 |                  152.4 |                   52.6 |           22.65 |
-| 8877689391 |                  182.8 |                 85.146 |          25.487 |
-| 2873212765 |                  162.6 |                   57.0 |           21.57 |
-| 5577150313 |                  180.0 |                   90.7 |            28.0 |
-| 1927972279 |                  167.6 |                  133.5 |           47.54 |
-| 6962181067 |                  160.1 |                 61.553 |          24.028 |
+|:----------:|-----------------------:|-----------------------:|:---------------:|
+| 4558609924 |          160.0         |                  69.64 |          27.214 |
+| 4319703577 |          162.5         |                  72.35 |          27.415 |
+| 1503960366 |          152.4         |                   52.6 |           22.65 |
+| 8877689391 |          182.8         |                 85.146 |          25.487 |
+| 2873212765 |          162.6         |                   57.0 |           21.57 |
+| 5577150313 |          180.0         |                   90.7 |            28.0 |
+| 1927972279 |          167.6         |                  133.5 |           47.54 |
+| 6962181067 |          160.1         |                 61.553 |          24.028 |
+
+*(See code in the Appendix)*
 
 ### Smart Device Usage
 Finally, we will examine the user engagement, in order to know the samrt device usage. <br />
@@ -297,6 +302,16 @@ We will categorize their engagement as below:
  * Lightly Active User: Have 7 to 15 daily activity record.
  * Not Active User: Have 1 to 6 daily activity record.
 
+|          **Id**         |   *4057192912*  |      *2347167796*      |      *8253242879*      |      *3372868164*      | *6775888955* | *7007744171* | *6117666160* | *8792009665* | *6290855005* | *1644430081* | *3977333714* | *5577150313* | *1624580081* | *2022484408* | *4319703577* | *4388161847* | *4702921684* | *6962181067* | *7086361926* | *8583815059* | *1844505072* | *1927972279* | *2026352035* | *2320127002* | *2873212765* | *4020332650* | *4445114986* | *4558609924* | *5553957443* | *8053475328* | *8378563200* | *8877689391* | *1503960366* |
+|:-----------------------:|:---------------:|:----------------------:|:----------------------:|:----------------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|
+| **# of Active Records** |               4 |                     18 |                     19 |                     20 |           26 |           26 |           28 |           29 |           29 |           30 |           30 |           30 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |
+|  **Total Usage Hours**  |          88.167 |                292.117 |                455.717 |                  472.9 |      591.667 |      599.467 |       507.85 |       559.35 |      689.733 |      685.633 |      481.233 |      509.767 |      736.617 |        736.6 |      506.583 |      573.267 |      534.783 |       490.55 |      548.817 |       742.65 |        683.8 |      701.683 |      488.983 |      734.817 |      736.467 |       684.45 |      541.133 |      724.717 |      470.667 |      720.083 |      486.267 |      735.517 |       581.75 |
+|      **User Type**      | Not Active User | Moderately Active User | Moderately Active User | Moderately Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |
+
+*(See code in the Appendix)* <br />
+Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
+
+## Shareing Our Findings
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
