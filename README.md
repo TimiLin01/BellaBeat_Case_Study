@@ -324,4 +324,4 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 <a id="8">[8]</a> Centers for Disease Control and Prevention (CDC). How Much Sleep Do I Need? https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html
 
 ## Appendix
-For whole SQL code, check the txt files.
+For all the SQL codes, check the txt files.
