@@ -187,18 +187,15 @@ We can go even deeper by checking on which hours during the day people are the m
 ```sql
 SELECT
       DISTINCT Hours,
-      ROUND(AVG(StepTotal),3) AS hourly_avg_step,
-      COUNT(Id) AS No_of_user
+      ROUND(AVG(StepTotal),3) AS hourly_avg_step
 FROM
 (SELECT
        Hours,
-       StepTotal,
-       Id
+       StepTotal
  FROM(
       SELECT
             EXTRACT(HOUR FROM Time) AS Hours,
-            StepTotal,
-            Id
+            StepTotal
       FROM
           `bellabeat-timilin.Fit_Data.hourly_step`
      )
@@ -210,9 +207,50 @@ ORDER BY
 ```
 We found that the `hourly_avg_step` increases a lot around 8 AM and reaches its peak of 599.17 at 6 PM.
 
-### Calories burnt
-The U.S. Department of Health and Human Services [[5]](#5) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight information. Therefore, we will only look at the average calories burnt during the day and week.
-#### During the week
+### Average Calorie burnt
+The U.S. Department of Health and Human Services [[5]](#5) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight information. Therefore, we will only examine the average calories burnt for each user during the 31 days and when users burn the most calories.
+#### Per user
+```sql
+SELECT
+      DISTINCT Id,
+      ROUND(AVG(Calories),3) AS avg_cal,
+      ROUND(AVG(VeryActiveMinutes + FairlyActiveMinutes),3) AS avg_active_minute
+FROM
+      `bellabeat-timilin.Fit_Data.daily_activity`
+GROUP BY
+      Id
+```
+We can see that each user's average calorie expenses range from 1483.355 to 3436.581 Cal. And what we can definitely say is that there are four users who on average did not burn enough calories, because their average calorie expenses are less than 1600 Cal. <br />
+I also retrieved the average active minutes for each user, but at the moment we cannot see any obvious relationship between active minutes and calorie expense. We can keep these data and visualize them later so that we might see some correlation.
+#### During the day
+|        **AM**        |  **12** |  **1**  |  **2**  |  **3**  |  **4**  |  **5**  |   **6**   |  **7**  |  **8**  |  **9**  |  **10** |  **11** |
+|:--------------------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:---------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| **Average Calories** |  71.805 |  70.165 |  69.186 |  67.538 |  68.262 |  81.708 |   86.997  |  94.478 | 103.337 | 106.143 | 110.461 | 109.807 |
+|        **PM**        |  **12** |  **1**  |  **2**  |  **3**  |  **4**  |  **5**  |   **6**   |  **7**  |  **8**  |  **9**  |  **10** |  **11** |
+| **Average Calories** | 117.197 | 115.309 | 115.733 | 106.637 | 113.327 | 122.753 | *123.492* | 121.485 | 102.358 |  96.056 |  88.265 |  77.594 |
+
+*See code in the Appendix* <br />
+We found out that on average the highest calories of 123.492 Cal were burnt around 6 PM and the lowest of 67.538 Cal around 3 AM.
+
+### Heart Rate
+The normal resting heart rate for adults is between 60 - 100 beats per minute (bpm) [[6]](#6). But when people are doing physical activities their heart rate usually exceeds 100 bpm. The maximum heart rate a person can reach is *220 - his/her age*, however, we do not have any age-related data, so let's see their average, minimum and maximum heart rates first.
+```sql
+SELECT
+      Id,
+      ROUND(AVG(Value),3) AS avg_heartrate,
+      MIN(Value) AS Min_heartrate,
+      MAX(Value) AS Max_heartrate
+FROM
+      `bellabeat-timilin.Fit_Data.heartrate`
+GROUP BY
+      Id
+```
+We can see that all 14 users have an average heart rate between 60 and 100 bpm. We can also discover that most of the users have a minimum heart rate of around or even under 40 bpm, this is not a big concern for healthy young adults and trained athletes, since they commonly have 40 - 60 bpm during sleep and rest. But for a general adult heart rate under 60 bpm is qualified as bradycardia. <br />
+There are many records of a maximum heart rate exceeding 100 bpm, which can be qualified as tachycardia but can also be acceptable if the user was doing physical exercise. However, some records can be dangerous even if the user was doing exercise. For instance, *user 2022484408* reached 203 bpm, which can be the estimated maximum age-related heart rate for a 17-year-old (220 - 203 = 17) user, but is still dangerous even if he/she was doing vigorous-intensity physical activity. <br />
+By assuming users sleep between 10 PM and 6 AM, we can look for their average heart rate during their sleep. Luckily, most of them have an average between 60 and 100 bpm, only two users had around 54 and 58 bpm. <br />
+*See code in the Appendix*
+
+### Sleep
 
 
 ## Refrence
@@ -221,6 +259,8 @@ The U.S. Department of Health and Human Services [[5]](#5) suggest that the aver
 <a id="3">[3]</a> Bumgardner, W. "Why Your Fitbit Active Minutes Mean More Than Your Steps [2020-06-23]." https://www.verywellfit.com/why-active-minutes-mean-more-than-steps-4155747 <br />
 <a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099 <br />
 <a id="5">[5]</a> U.S. Department of Health and Human Services. 2015–2020 Dietary Guidelines for Americans. https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines/previous-dietary-guidelines/2015
+<a id="6">[6]</a> American Heart Association website. All About Heart Rate (Pulse). https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse <br />
+<a id="7">[7]</a> Centers for Disease Control and Prevention (CDC). Target Heart Rate and Estimated Maximum Heart Rate. https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm
 
 ## Appendix
-For whole sql code, check the txt files.
+For whole SQL code, check the txt files.
