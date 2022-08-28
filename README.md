@@ -295,12 +295,12 @@ So for each user, we get:
 *(See code in the Appendix)*
 
 ### Smart Device Usage
-Finally, we will examine the user engagement, in order to know the samrt device usage. <br />
+Finally, we will examine user engagement, in order to know the smart device usage. <br />
 We will categorize their engagement as below:
- * Active User: Have 25 to 31 daily activity record.
- * Moderately Active User: Have 16 to 24 daily activity record.
- * Lightly Active User: Have 7 to 15 daily activity record.
- * Not Active User: Have 1 to 6 daily activity record.
+ * Active User: Have 25 to 31 daily activity records.
+ * Moderately Active User: Have 16 to 24 daily activity records.
+ * Lightly Active User: Have 7 to 15 daily activity records.
+ * Not Active User: Have 1 to 6 daily activity records.
 
 |          **Id**         |   *4057192912*  |      *2347167796*      |      *8253242879*      |      *3372868164*      | *6775888955* | *7007744171* | *6117666160* | *8792009665* | *6290855005* | *1644430081* | *3977333714* | *5577150313* | *1624580081* | *2022484408* | *4319703577* | *4388161847* | *4702921684* | *6962181067* | *7086361926* | *8583815059* | *1844505072* | *1927972279* | *2026352035* | *2320127002* | *2873212765* | *4020332650* | *4445114986* | *4558609924* | *5553957443* | *8053475328* | *8378563200* | *8877689391* | *1503960366* |
 |:-----------------------:|:---------------:|:----------------------:|:----------------------:|:----------------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|
