@@ -61,7 +61,9 @@ SELECT
 FROM 
      `bellabeat-timilin.Fit_Data.heartrate` 
 ```
-And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_step`, `sleep_day` and `weight_log` tables.
+And similarly we can do this for `hourly_cal`, `hourly_intensities`, `hourly_step`, `sleep_day` and `weight_log` tables. <br />
+*See code in the Appendix*
+
 ### Data Cleaning
 First, we check whether there is any NULL Value in our dataset:
 ```sql
@@ -120,6 +122,8 @@ This gives a new table:
 |   **Table Name**  |       **CSV File Name**       |       **Discription**        |
 |:-----------------:|:-----------------------------:|:-----------------------------|
 |  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
+
+*See codes in the Appendix*
 
 ## Analysing Data
 ### Checking the # of users
@@ -208,7 +212,7 @@ ORDER BY
 We found that the `hourly_avg_step` increases a lot around 8 AM and reaches its peak of 599.17 at 6 PM.
 
 ### Average Calorie burnt
-The U.S. Department of Health and Human Services [[5]](#5) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight information. Therefore, we will only examine the average calories burnt for each user during the 31 days and when users burn the most calories.
+The U.S. Department of Health and Human Services [[5]](#5) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight and BMI information. Therefore, we will only examine the average calories burnt for each user during the 31 days and when users burn the most calories.
 #### Per user
 ```sql
 SELECT
@@ -233,7 +237,7 @@ I also retrieved the average active minutes for each user, but at the moment we 
 We found out that on average the highest calories of 123.492 Cal were burnt around 6 PM and the lowest of 67.538 Cal around 3 AM.
 
 ### Heart Rate
-The normal resting heart rate for adults is between 60 - 100 beats per minute (bpm) [[6]](#6). But when people are doing physical activities their heart rate usually exceeds 100 bpm. The maximum heart rate a person can reach is *220 - his/her age*, however, we do not have any age-related data, so let's see their average, minimum and maximum heart rates first.
+The normal resting heart rate for adults is between 60 - 100 beats per minute (bpm) [[6]](#6). But when people are doing physical activities their heart rate usually exceeds 100 bpm. The maximum heart rate a person can reach is *220 - his/her age* [[7]](#7), however, we do not have any age-related data, so let's see their average, minimum and maximum heart rates first.
 ```sql
 SELECT
       Id,
@@ -251,6 +255,47 @@ By assuming users sleep between 10 PM and 6 AM, we can look for their average he
 *See code in the Appendix*
 
 ### Sleep
+According to the Centers for Disease Control and Prevention (CDC), the recommended hours of sleep per day changes as the user age. In general, an adult needs 7 - 9 hours of sleep a day. So let's find out the average sleeping hours for each user.
+```sql
+SELECT
+      Id,
+      ROUND((total_sleep/no_of_sleep)/60,3) AS avg_daily_sleephour
+FROM
+(SELECT
+      DISTINCT Id,
+      SUM(TotalMinutesAsleep) AS total_sleep,
+      COUNT(TotalMinutesAsleep) AS no_of_sleep
+FROM
+      `bellabeat-timilin.Fit_Data.sleep_day_new`
+GROUP BY
+      Id
+)
+```
+There are only 10 out of 24 users (*41.6%*) sleep 7 - 9 hours on average, 1 out of 24 sleeps over 9 hours (10.867h) and all of the rest of the users do not have enough sleep. We are not sure whether those users really do not have enough sleep or they only recorded their nap and not their evening sleep.
+
+### Weight, BMI and Height
+As we said before, we only have the weight and BMI information of only 8 users. We can use the below equation to calculate the height of the users: <br />
+<p align="center"><img width="298" alt="bellabeat-bmi" src="https://user-images.githubusercontent.com/72343428/187093390-17f4d125-e093-4edd-9ba5-1bfe51ad7c62.png"></p>
+So for each user, we get: <br />
+
+|   **Id**   | **Average Height(cm)** | **Average Weight(kg)** | **Average BMI** |
+|:----------:|-----------------------:|-----------------------:|----------------:|
+| 4558609924 |                  160.0 |                  69.64 |          27.214 |
+| 4319703577 |                  162.5 |                  72.35 |          27.415 |
+| 1503960366 |                  152.4 |                   52.6 |           22.65 |
+| 8877689391 |                  182.8 |                 85.146 |          25.487 |
+| 2873212765 |                  162.6 |                   57.0 |           21.57 |
+| 5577150313 |                  180.0 |                   90.7 |            28.0 |
+| 1927972279 |                  167.6 |                  133.5 |           47.54 |
+| 6962181067 |                  160.1 |                 61.553 |          24.028 |
+
+### Smart Device Usage
+Finally, we will examine the user engagement, in order to know the samrt device usage. <br />
+We will categorize their engagement as below:
+ * Active User: Have 25 to 31 daily activity record.
+ * Moderately Active User: Have 16 to 24 daily activity record.
+ * Lightly Active User: Have 7 to 15 daily activity record.
+ * Not Active User: Have 1 to 6 daily activity record.
 
 
 ## Refrence
@@ -260,7 +305,8 @@ By assuming users sleep between 10 PM and 6 AM, we can look for their average he
 <a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099 <br />
 <a id="5">[5]</a> U.S. Department of Health and Human Services. 2015–2020 Dietary Guidelines for Americans. https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines/previous-dietary-guidelines/2015
 <a id="6">[6]</a> American Heart Association website. All About Heart Rate (Pulse). https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse <br />
-<a id="7">[7]</a> Centers for Disease Control and Prevention (CDC). Target Heart Rate and Estimated Maximum Heart Rate. https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm
+<a id="7">[7]</a> Centers for Disease Control and Prevention (CDC). Target Heart Rate and Estimated Maximum Heart Rate. https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm <br />
+<a id="8">[8]</a> Centers for Disease Control and Prevention (CDC). How Much Sleep Do I Need? https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html
 
 ## Appendix
 For whole SQL code, check the txt files.
