@@ -312,7 +312,10 @@ We will categorize their engagement as below:
 Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 
 ## Shareing Our Findings
+### Steps
+**1.** The graph below shows the average steps during the day. We can see that around 3 AM, there is almost 0 steps, which is reasonable, since people are sleeping.
 ![Step_DuringDay](https://user-images.githubusercontent.com/72343428/188267130-d25a1aa2-9fee-4bc4-b1de-78386a359c3b.png)
+
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
