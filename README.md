@@ -10,6 +10,8 @@
  * [Analysing Data](#analyse)
  * [Sharing Our Findings](#share)
  * [Act](#act)
+ * [Reference](#ref)
+ * [Appendix](#appendix)
  
 <a name="intro"/>
 
@@ -342,25 +344,30 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 **2.** We now can see the average step walked by the users during the 31 days period. And we can notice that *60.6%* of the users complete the daily 7000-step goal.
 ![Steps_Goal](https://user-images.githubusercontent.com/72343428/188491397-b23e5fcf-33c5-4f29-b87c-56a72bfe722d.jpg)
 
+<a name="step_week"/>
+
 **3.** Taking the average by weekdays, we can discover that except for Sunday, the daily 7000-step goal is completed on the other days.
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" height="400" /></p>
 
 ### Active Minutes
-**1.** Step number is not the only criterion to determine whether a user have done enough sport or not a day, we can also check their active minutes. An adult should have 30 active minutes a day, and we can see that only 51.5% of the users completed this goal.
+**1.** Step number is not the only criterion to determine whether a user has done enough sport or not a day. We can also check their active minutes. An adult should have 30 active minutes daily, and we can see that only 51.5% of the users completed this goal.
 ![ActMin_Goal](https://user-images.githubusercontent.com/72343428/188504400-5fc30696-9bf5-44c8-9e25-a9c396cc8bf8.jpg)
 
-**2.**
+**2.** Based on the above standard, the daily goal is completed on all the weekdays. And we notice that people are especially active on Monday, Tuesday and Saturday. This is also suggested from the [Average Steps During the Week](#step_week) graph. 
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505574-6b1f102a-eca8-4859-8b12-56669ab386b1.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505574-6b1f102a-eca8-4859-8b12-56669ab386b1.jpg" height="350" /></p>
 
-**3.**
+**3.** If we combine our 7000-step and 30-minute goals, we can see *63.6%* of users completed at least one or both goals.
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" height="300" /></p>
 
+### Calories Burnt
 
 
 <a name="act"/>
 
 ## Act
 
+
+<a name="ref"/>
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
@@ -372,6 +379,8 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 <a id="7">[7]</a> American Heart Association website. All About Heart Rate (Pulse). https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse <br />
 <a id="8">[8]</a> Centers for Disease Control and Prevention (CDC). Target Heart Rate and Estimated Maximum Heart Rate. https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm <br />
 <a id="9">[9]</a> Centers for Disease Control and Prevention (CDC). How Much Sleep Do I Need? https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html
+
+<a name="appendix"/>
 
 ## Appendix
 For all the SQL codes, check the txt files.
