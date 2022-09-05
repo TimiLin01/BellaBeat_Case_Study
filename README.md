@@ -140,7 +140,7 @@ FROM `bellabeat-timilin.Fit_Data.daily_activity`
 
 *(See code in the Appendix)*
 ### Average Steps VS Average Active Minutes
-The Centers for Disease Control and Prevention (CDC) suggest that adults should aim for 10000 steps per day [[2]](#2). But recently, many articles have also said that 7000 steps are already enough. Therefore, we can first investigate how many users walk more than 7000 steps a day on average.
+The Centers for Disease Control and Prevention (CDC) suggest that adults should aim for 10000 steps per day [[2]](#2). But recently, there have been researches [[3]](#3) which also said that 7000 steps are already enough. Therefore, we can first investigate how many users walk more than 7000 steps a day on average.
 ```sql
 SELECT 
       DISTINCT Id,
@@ -153,7 +153,7 @@ HAVING daily_avg_step >= 7000
 ```
 This gives us back 20 users out of 33, which is *60.6%* of our sample population. <br />
 However, does having more steps means that you were more active and did more sport than others who completed fewer steps? Not necessarily, since step numbers can be faked. Therefore, we should look at the active minutes. <br />
-An adult should aim for at least 30 "active minutes" per day [[3]](#3). But how can we link this with our dataset? Actually, Fitbit measures active minutes, but in our data, it is split into "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes" and "SedentaryMinutes". And the "active minutes" we want to measure is indeed "VeryActiveMinutes" + "FairlyActiveMinutes" = "Active Minutes" [[4]](#4). <br />
+An adult should aim for at least 30 "active minutes" per day [[4]](#4). But how can we link this with our dataset? Actually, Fitbit measures active minutes, but in our data, it is split into "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes" and "SedentaryMinutes". And the "active minutes" we want to measure is indeed "VeryActiveMinutes" + "FairlyActiveMinutes" = "Active Minutes" [[5]](#5). <br />
 Therefore, to gain the average active minutes:
 ```sql
 SELECT 
@@ -214,7 +214,7 @@ ORDER BY
 We found that the `hourly_avg_step` increases a lot around 8 AM and reaches its peak of 599.17 at 6 PM.
 
 ### Average Calorie burnt
-The U.S. Department of Health and Human Services [[5]](#5) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight and BMI information. Therefore, we will only examine the average calories burnt for each user during the 31 days and when users burn the most calories.
+The U.S. Department of Health and Human Services [[6]](#6) suggest that the average adult woman burns roughly 1,600 - 2,400 calories per day, and the average adult man uses 2,000 - 3,000 calories per day. However, to determine the exact numbers, we will need people's information regarding height, weight and gender. Unfortunately, we only have the weight and BMI information. Therefore, we will only examine the average calories burnt for each user during the 31 days and when users burn the most calories.
 #### Per user
 ```sql
 SELECT
@@ -226,8 +226,8 @@ FROM
 GROUP BY
       Id
 ```
-We discovered that each user's average calorie expenses range from 1483.355 to 3436.581 Cal. And what we can definitely say is that there are four users who on average did not burn enough calories, because their average calorie expenses are less than 1600 Cal. <br />
-I also retrieved the average active minutes for each user, but at the moment we cannot see any obvious relationship between active minutes and calorie expense. We can keep these data and visualize them later so that we might see some correlation.
+We discovered that each user's average calorie expenses range from 1483.355 to 3436.581 Cal. And what we can definitely say is that there are four users who on average did not burn enough calories because their average calorie expenses are less than 1600 Cal. <br />
+I also retrieved the average active minutes for each user, but at the moment we cannot see any obvious relationship between active minutes and calorie expense. We can keep these data and visualise them later so that we might see some correlation.
 #### During the day
 |        **AM**        |  **12** |  **1**  |  **2**  |  **3**  |  **4**  |  **5**  |   **6**   |  **7**  |  **8**  |  **9**  |  **10** |  **11** |
 |:--------------------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:---------:|:-------:|:-------:|:-------:|:-------:|:-------:|
@@ -239,7 +239,7 @@ I also retrieved the average active minutes for each user, but at the moment we 
 We found out that on average the highest calories of 123.492 Cal were burnt around 6 PM and the lowest of 67.538 Cal around 3 AM.
 
 ### Heart Rate
-The normal resting heart rate for adults is between 60 - 100 beats per minute (bpm) [[6]](#6). But when people are doing physical activities their heart rate usually exceeds 100 bpm. The maximum heart rate a person can reach is *220 - his/her age* [[7]](#7), however, we do not have any age-related data, so let's see their average, minimum and maximum heart rates first.
+The normal resting heart rate for adults is between 60 - 100 beats per minute (bpm) [[7]](#7). But when people are doing physical activities their heart rate usually exceeds 100 bpm. The maximum heart rate a person can reach is *220 - his/her age* [[8]](#8), however, we do not have any age-related data, so let's see their average, minimum and maximum heart rates first.
 ```sql
 SELECT
       Id,
@@ -295,8 +295,8 @@ So for each user, we get:
 *(See code in the Appendix)*
 
 ### Smart Device Usage
-Finally, we will examine user engagement, in order to know the smart device usage. <br />
-We will categorize their engagement as below:
+Finally, we will examine user engagement in order to know the smart device usage. <br />
+We will categorise their engagement as below:
  * Active User: Have 25 to 31 daily activity records.
  * Moderately Active User: Have 16 to 24 daily activity records.
  * Lightly Active User: Have 7 to 15 daily activity records.
@@ -311,21 +311,41 @@ We will categorize their engagement as below:
 *(See code in the Appendix)* <br />
 Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 
-## Shareing Our Findings
+## Sharing Our Findings
+*(All the graphs can be found on my Tableau)*
 ### Steps
-**1.** The graph below shows the average steps during the day. We can see that around 3 AM, there is almost 0 steps, which is reasonable, since people are sleeping.
-![Step_DuringDay](https://user-images.githubusercontent.com/72343428/188267130-d25a1aa2-9fee-4bc4-b1de-78386a359c3b.png)
+**1.** The graph below shows the average steps during the day. We can see that around 3 AM, there are almost 0 steps, which is reasonable since people are sleeping. From 5 AM, the step number increases dramatically, people wake up and go to work. The average step number floats between 400 and 600 from 8 AM to 7 PM.
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188267130-d25a1aa2-9fee-4bc4-b1de-78386a359c3b.png" data-canonical-src="https://user-images.githubusercontent.com/72343428/188267130-d25a1aa2-9fee-4bc4-b1de-78386a359c3b.png" width="900" /></p>
+
+
+**2.** We now can see the average step walked by the users during the 31 days period. And we can notice that *60.6%* of the users complete the daily 7000-step goal.
+![Steps_Goal](https://user-images.githubusercontent.com/72343428/188491397-b23e5fcf-33c5-4f29-b87c-56a72bfe722d.jpg)
+
+**3.** Taking the average by weekdays, we can discover that except for Sunday, the daily 7000-step goal is completed on the other days.
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" height="400" /></p>
+
+### Active Minutes
+**1.** Step number is not the only criterion to determine whether a user have done enough sport or not a day, we can also check their active minutes. An adult should have 30 active minutes a day, and we can see that only 51.5% of the users completed this goal.
+![ActMin_Goal](https://user-images.githubusercontent.com/72343428/188504400-5fc30696-9bf5-44c8-9e25-a9c396cc8bf8.jpg)
+
+**2.**
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505574-6b1f102a-eca8-4859-8b12-56669ab386b1.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505574-6b1f102a-eca8-4859-8b12-56669ab386b1.jpg" height="350" /></p>
+
+**3.**
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" height="300" /></p>
+
 
 
 ## Refrence
 <a id="1">[1]</a> Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.53894 <br />
 <a id="2">[2]</a> Centers for Disease Control and Prevention (CDC). Stepping Up to Physcial Activity. Lifestyle Coach Facilitation Guide: Post-Core https://www.cdc.gov/diabetes/prevention/pdf/postcurriculum_session8.pdf <br />
-<a id="3">[3]</a> Bumgardner, W. "Why Your Fitbit Active Minutes Mean More Than Your Steps [2020-06-23]." https://www.verywellfit.com/why-active-minutes-mean-more-than-steps-4155747 <br />
-<a id="4">[4]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099 <br />
-<a id="5">[5]</a> U.S. Department of Health and Human Services. 2015–2020 Dietary Guidelines for Americans. https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines/previous-dietary-guidelines/2015
-<a id="6">[6]</a> American Heart Association website. All About Heart Rate (Pulse). https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse <br />
-<a id="7">[7]</a> Centers for Disease Control and Prevention (CDC). Target Heart Rate and Estimated Maximum Heart Rate. https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm <br />
-<a id="8">[8]</a> Centers for Disease Control and Prevention (CDC). How Much Sleep Do I Need? https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html
+<a id="3">[3]</a> Paluch, Amanda E., et al. "Steps per day and all-cause mortality in middle-aged adults in the coronary artery risk development in young adults study." JAMA network open 4.9 (2021): e2124516-e2124516. https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2783711 <br />
+<a id="4">[4]</a> Bumgardner, W. "Why Your Fitbit Active Minutes Mean More Than Your Steps [2020-06-23]." https://www.verywellfit.com/why-active-minutes-mean-more-than-steps-4155747 <br />
+<a id="5">[5]</a> Semanik, P., Lee, J., Pellegrini, C. A., Song, J., Dunlop, D. D., & Chang, R. W. (2020). Comparison of physical activity measures derived from the Fitbit Flex and the ActiGraph GT3X+ in an employee population with chronic knee symptoms. ACR Open Rheumatology, 2(1), 48-52. https://onlinelibrary.wiley.com/doi/full/10.1002/acr2.11099 <br />
+<a id="6">[6]</a> U.S. Department of Health and Human Services. 2015–2020 Dietary Guidelines for Americans. https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines/previous-dietary-guidelines/2015 <br />
+<a id="7">[7]</a> American Heart Association website. All About Heart Rate (Pulse). https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse <br />
+<a id="8">[8]</a> Centers for Disease Control and Prevention (CDC). Target Heart Rate and Estimated Maximum Heart Rate. https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm <br />
+<a id="9">[9]</a> Centers for Disease Control and Prevention (CDC). How Much Sleep Do I Need? https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html
 
 ## Appendix
 For all the SQL codes, check the txt files.
