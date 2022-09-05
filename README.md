@@ -346,8 +346,8 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 
 <a name="step_week"/>
 
-**3.** Taking the average by weekdays, we can discover that except for Sunday, the daily 7000-step goal is completed on the other days.
-<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" height="400" /></p>
+<img align="right" src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188494830-707cecb9-f345-4a43-a687-eef0f5480682.jpg" height="400" /> <br />
+**3.** Taking the average by weekdays, we can discover that except for Sunday, the daily 7000-step goal is completed on the other days. <br clear="right"/>
 
 ### Active Minutes
 **1.** Step number is not the only criterion to determine whether a user has done enough sport or not a day. We can also check their active minutes. An adult should have 30 active minutes daily, and we can see that only 51.5% of the users completed this goal.
