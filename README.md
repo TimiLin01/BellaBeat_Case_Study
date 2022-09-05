@@ -2,9 +2,22 @@
 ### Google Data Analytics Capstone Project
 ![bellabeat](https://user-images.githubusercontent.com/72343428/185792124-e7fe7db9-b2e6-47c8-bdcf-55da42c3b54f.png)
 
+## Contents  
+ * [Introduction](#intro)
+ * [Ask](#ask)
+ * [Prepare](#pre)
+ * [Processing Data](#process)
+ * [Analysing Data](#analyse)
+ * [Sharing Our Findings](#share)
+ * [Act](#act)
+ 
+<a name="intro"/>
+
 ## Introduction
 ### Company Background
 BellaBeat was founded by Urška Sršen and Sandro Mur in 2013. It is a high-tech company that manufactures health-focused smart products and collects data on the activity, sleeps, stress and reproductive health of its customers in order to provide information regarding their health and habits.
+
+<a name="ask"/>
 
 ## Ask
 ### Business Task
@@ -13,6 +26,8 @@ Identifying the trends in smart device usage and providing recommendations that 
  * Urška Sršen: BellaBeat Co-founder and Chief Creative Officer (CCO)
  * Sandro Mur: Mathematician, BellaBeat Co-founder and Chief Executive Officer (CEO)
  * BellaBeat Marketing Team
+
+<a name="pre"/>
 
 ## Prepare
 ### About the Data
@@ -41,6 +56,8 @@ To determine the credibility and integrity of the data, I will use the **'ROCCC'
   * **Current**: The data is **not** current since it was collected in 2016. Therefore our analysis cannot represent the current trend in smart device usage.
   * **Cited**: It is cited. <br />
 As a result, our data do not satisfy the 'ROCCC' system. This means that using this dataset, we are **unable** to provide reliable and comprehensive recommendations for BellaBeats. Hence, our analysis can only act as directions which should be verified through a more reliable dataset.
+
+<a name="process"/>
 
 ## Processing Data
 ### Uploading and Transforming Data
@@ -124,6 +141,8 @@ This gives a new table:
 |  sleep_day_new    |  sleepDay_merged_cleaned.csv  | Cleaned version of sleep_day |
 
 *(See codes in the Appendix)*
+
+<a name="analyse"/>
 
 ## Analysing Data
 ### Checking the # of users
@@ -311,6 +330,8 @@ We will categorise their engagement as below:
 *(See code in the Appendix)* <br />
 Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 
+<a name="share"/>
+
 ## Sharing Our Findings
 *(All the graphs can be found on my Tableau)*
 ### Steps
@@ -334,6 +355,11 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 **3.**
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" height="300" /></p>
 
+
+
+<a name="act"/>
+
+## Act
 
 
 ## Refrence
