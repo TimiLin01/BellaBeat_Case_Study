@@ -12,7 +12,7 @@
  * [Act](#act)
  * [Reference](#ref)
  * [Appendix](#appendix)
- 
+
 <a name="intro"/>
 
 ## Introduction
@@ -335,7 +335,7 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 <a name="share"/>
 
 ## Sharing Our Findings
-*(All the graphs can be found on my Tableau)*
+*(All the graphs can be found on my [Tableau](https://public.tableau.com/app/profile/jia.xin.lin) under the BellaBeat Case Study viz)*
 ### Steps
 **1.** The graph below shows the average steps during the day. We can see that around 3 AM, there are almost 0 steps, which is reasonable since people are sleeping. From 5 AM, the step number increases dramatically, people wake up and go to work. The average step number floats between 400 and 600 from 8 AM to 7 PM.
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188267130-d25a1aa2-9fee-4bc4-b1de-78386a359c3b.png" data-canonical-src="https://user-images.githubusercontent.com/72343428/188267130-d25a1aa2-9fee-4bc4-b1de-78386a359c3b.png" width="900" /></p>
@@ -360,6 +360,15 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" height="300" /></p>
 
 ### Calories Burnt
+**1.** Most of the calories were burnt between 9 AM and 7 PM.
+![Calories_day](https://user-images.githubusercontent.com/72343428/188677989-287efd44-ffbb-4274-a331-804b24daba93.png)
+
+**2.** We want to find the relationship between calories burnt and step number, so we tried to find the best fit trendline. We know that a trendline is most reliable when its R-squared value is at or near 1. Therefore we found out that the polynomial trendline fits our data the most. The graphs below both have a cubic trendline. However, if we try to increase the degree of our model, then we will get a closer R-squared value to 1. Since we only have 33 data points, I chose not to visualise a higher degree model to avoid bias. <br />
+
+![Calories_Step](https://user-images.githubusercontent.com/72343428/188678069-35efcfab-bf69-48b1-9913-22550aa89fe2.png)
+
+**3.**
+![Calories_ActMin](https://user-images.githubusercontent.com/72343428/188678103-16fda551-6312-41fa-b749-4d51c57afc76.png)
 
 
 <a name="act"/>
