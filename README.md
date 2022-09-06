@@ -315,6 +315,8 @@ So for each user, we get:
 
 *(See code in the Appendix)*
 
+<a name="type"/>
+
 ### Smart Device Usage
 Finally, we will examine user engagement in order to know the smart device usage. <br />
 We will categorise their engagement as below:
@@ -363,13 +365,16 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 **1.** Most of the calories were burnt between 9 AM and 7 PM.
 ![Calories_day](https://user-images.githubusercontent.com/72343428/188677989-287efd44-ffbb-4274-a331-804b24daba93.png)
 
-**2.** We want to find the relationship between calories burnt and step number, so we tried to find the best fit trendline. We know that a trendline is most reliable when its R-squared value is at or near 1. Therefore we found out that the polynomial trendline fits our data the most. The graphs below both have a cubic trendline. However, if we try to increase the degree of our model, then we will get a closer R-squared value to 1. Since we only have 33 data points, I chose not to visualise a higher degree model to avoid bias. <br />
-
+**2.** We want to find the relationship between calories burnt and step number, so we tried to find the best fit trendline. We know that a trendline is most reliable when its R-squared value is at or near 1. Therefore we found out that the polynomial trendline fits our data the most. The graphs below both have a cubic trendline. However, if we try to increase the degree of our model, then we will get a closer R-squared value to 1. Since we only have around 30 data points, I chose not to visualise a higher degree model to avoid bias. <br />
+If we group our data by user Id, then the R-squared of the model is only around 0.213, but if we group by date, then R-squared is 0.967. So might use this cubic model to estimate the daily average calories burnt given the average step, or vice versa. 
 ![Calories_Step](https://user-images.githubusercontent.com/72343428/188678069-35efcfab-bf69-48b1-9913-22550aa89fe2.png)
 
-**3.**
+**3.** Similar to above.
 ![Calories_ActMin](https://user-images.githubusercontent.com/72343428/188678103-16fda551-6312-41fa-b749-4d51c57afc76.png)
 
+### Smart Device Usage
+I have divided the users into 4 groups as defined [above](#type), and overall we have *87.88%* active users, they almost use a smart device everyday during the period.
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188747799-42b9f716-450c-47c9-a18f-25f47ffefe22.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188747799-42b9f716-450c-47c9-a18f-25f47ffefe22.jpg" height="300" /></p>
 
 <a name="act"/>
 
