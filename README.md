@@ -320,19 +320,19 @@ So for each user, we get:
 ### Smart Device Usage
 Finally, we will examine user engagement in order to know the smart device usage. <br />
 We will categorise their engagement as below:
- * Active User: Have 25 to 31 daily activity records.
- * Moderately Active User: Have 16 to 24 daily activity records.
- * Lightly Active User: Have 7 to 15 daily activity records.
- * Not Active User: Have 1 to 6 daily activity records.
+ * Very Active User: Have at least 25 activity records and total usage of 500 hours (20h/day).
+ * Moderately Active User: Have at least 16 daily activity records and 320 hrs usage.
+ * Lightly Active User: Have at least 7 daily activity records and 140 hrs usage.
+ * Not Active User: Have at least 1 activity record and 20 hrs usage.
 
-|          **Id**         |   *4057192912*  |      *2347167796*      |      *8253242879*      |      *3372868164*      | *6775888955* | *7007744171* | *6117666160* | *8792009665* | *6290855005* | *1644430081* | *3977333714* | *5577150313* | *1624580081* | *2022484408* | *4319703577* | *4388161847* | *4702921684* | *6962181067* | *7086361926* | *8583815059* | *1844505072* | *1927972279* | *2026352035* | *2320127002* | *2873212765* | *4020332650* | *4445114986* | *4558609924* | *5553957443* | *8053475328* | *8378563200* | *8877689391* | *1503960366* |
-|:-----------------------:|:---------------:|:----------------------:|:----------------------:|:----------------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|
-| **# of Active Records** |               4 |                     18 |                     19 |                     20 |           26 |           26 |           28 |           29 |           29 |           30 |           30 |           30 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |           31 |
-|  **Total Usage Hours**  |          88.167 |                292.117 |                455.717 |                  472.9 |      591.667 |      599.467 |       507.85 |       559.35 |      689.733 |      685.633 |      481.233 |      509.767 |      736.617 |        736.6 |      506.583 |      573.267 |      534.783 |       490.55 |      548.817 |       742.65 |        683.8 |      701.683 |      488.983 |      734.817 |      736.467 |       684.45 |      541.133 |      724.717 |      470.667 |      720.083 |      486.267 |      735.517 |       581.75 |
-|      **User Type**      | Not Active User | Moderately Active User | Moderately Active User | Moderately Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |  Active User |
+|          **Id**         | **_4057192912_** |   **_2347167796_**  |    **_8253242879_**    |    **_3372868164_**    | **_6775888955_** | **_7007744171_** | **_6117666160_** | **_8792009665_** | **_6290855005_** | **_1644430081_** |    **_3977333714_**    | **_5577150313_** | **_1624580081_** | **_2022484408_** | **_4319703577_** | **_4388161847_** | **_4702921684_** |    **_6962181067_**    | **_7086361926_** | **_8583815059_** | **_1844505072_** | **_1927972279_** |    **_2026352035_**    | **_2320127002_** | **_2873212765_** | **_4020332650_** | **_4445114986_** | **_4558609924_** |    **_5553957443_**    | **_8053475328_** |    **_8378563200_**    | **_8877689391_** | **_1503960366_** |
+|:-----------------------:|:----------------:|:-------------------:|:----------------------:|:----------------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|:----------------------:|:----------------:|:----------------------:|:----------------:|:----------------:|
+| **# of Active Records** |                4 |                  18 |                     19 |                     20 |               26 |               26 |               28 |               29 |               29 |               30 |                     30 |               30 |               31 |               31 |               31 |               31 |               31 |                     31 |               31 |               31 |               31 |               31 |                     31 |               31 |               31 |               31 |               31 |               31 |                     31 |               31 |                     31 |               31 |               31 |
+|   **Total Usage Hours** |           88.167 |             292.117 |                455.717 |                  472.9 |          591.667 |          599.467 |           507.85 |           559.35 |          689.733 |          685.633 |                481.233 |          509.767 |          736.617 |            736.6 |          506.583 |          573.267 |          534.783 |                 490.55 |          548.817 |           742.65 |            683.8 |          701.683 |                488.983 |          734.817 |          736.467 |           684.45 |          541.133 |          724.717 |                470.667 |          720.083 |                486.267 |          735.517 |           581.75 |
+|      **User Type**      |  Not Active User | Lightly Active User | Moderately Active User | Moderately Active User | Very Active User | Very Active User | Very Active User | Very Active User | Very Active User | Very Active User | Moderately Active User | Very Active User | Very Active User | Very Active User | Very Active User | Very Active User | Very Active User | Moderately Active User | Very Active User | Very Active User | Very Active User | Very Active User | Moderately Active User | Very Active User | Very Active User | Very Active User | Very Active User | Very Active User | Moderately Active User | Very Active User | Moderately Active User | Very Active User | Very Active User |
 
 *(See code in the Appendix)* <br />
-Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
+Overall we have 1 Not Active, 1 Lightly Active, 7 Moderately Active and 24 Very Active Users.
 
 <a name="share"/>
 
@@ -359,7 +359,7 @@ Overall we have 1 Not Active User, 3 Moderately Active User and 29 Active User.
 <p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505574-6b1f102a-eca8-4859-8b12-56669ab386b1.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505574-6b1f102a-eca8-4859-8b12-56669ab386b1.jpg" height="350" /></p>
 
 **3.** If we combine our 7000-step and 30-minute goals, we can see *63.6%* of users completed at least one or both goals.
-<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" height="300" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188505806-1fe989c1-e4e1-4696-bfd8-9a2eef57e7c0.jpg" height="270" /></p>
 
 ### Calories Burnt
 **1.** Most of the calories were burnt between 9 AM and 7 PM.
@@ -372,9 +372,15 @@ If we group our data by user Id, then the R-squared of the model is only around 
 **3.** Similar to above.
 ![Calories_ActMin](https://user-images.githubusercontent.com/72343428/188678103-16fda551-6312-41fa-b749-4d51c57afc76.png)
 
-### Smart Device Usage
-I have divided the users into 4 groups as defined [above](#type), and overall we have *87.88%* active users, they almost use a smart device everyday during the period.
-<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188747799-42b9f716-450c-47c9-a18f-25f47ffefe22.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188747799-42b9f716-450c-47c9-a18f-25f47ffefe22.jpg" height="300" /></p>
+### Key Findings
+**1.** I have divided the users into four groups as defined [above](#type), and overall we have *72.73%* very active users. They use a smart device almost on a daily basis for at least 20 hours during the period.
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188970584-6cbdab4b-f202-4c5a-bae4-43020067e4ff.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188970584-6cbdab4b-f202-4c5a-bae4-43020067e4ff.jpg" height="300" /></p>
+
+**2.** Based on our earlier findings, an adult needs at least 7 hours of sleep every day, so let's set this as our sleep goal. The below graphs show how many goals are completed by the 33 users. Since our sleep-related data only includes 24 users, so we can see a *27.27%* of Null on both graphs. These are the users who did not record their sleeping records. <br />
+On the left, we can see that only one-third of the users had enough sleep, so apart from what we said earlier, that people might only record their naps, this might also indicate that users tend to take off their smart devices while sleeping. <br />
+On the right, we have *18.18%* of users who live very healthily and completed all the 7000-step, 30-active minute and 7-hour sleep goals. And *15.15%* of users did not complete any goals. This does not necessarily mean that these people are living unhealthy. They might just not be keen on using a smart device.
+<p align="center"><img src="https://user-images.githubusercontent.com/72343428/188972834-ca0fdf40-f513-485f-82d5-c52ef3d718b2.jpg" data-canonical-src="https://user-images.githubusercontent.com/72343428/188972834-ca0fdf40-f513-485f-82d5-c52ef3d718b2.jpg" /></p>
+
 
 <a name="act"/>
 
