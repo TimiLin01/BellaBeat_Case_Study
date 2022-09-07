@@ -385,7 +385,12 @@ On the right, we have *18.18%* of users who live very healthily and completed al
 <a name="act"/>
 
 ## Act
-
+Based on the analysed data, to improve user engagement:
+ * Introducing such smart devices that can be worn the whole day and do not need to be taken off. By emphasising the keywords like **"can be worn all the day"**, **"not harmful for the body"** and **"waterproof"** can target those clients who are lazy about changing/wearing and taking off smart devices. Also, this helps BellaBeat to collect more data, like sleep-related ones and makes our analysis more accurate.
+ * To motivate users to complete goals, we can introduce **rewards** when users complete a goal. Rewards, for instance, can be a collection of cute virtual badges. This can attract people who are passionate about collecting.
+ * We can also add a **sign-in form** with rewards. Users can sign in when they have done enough sport.
+ * To help users increase their active minutes, we can **notify (like using vibrations)** users when suitable, and users can only close these notifications when they have done enough sport.
+In order to make better recommendations, we need a more reliable analysis. Therefore we must continue to collect more data from more users.
 
 <a name="ref"/>
 
