@@ -35,7 +35,7 @@ Identifying the trends in smart device usage and providing recommendations that 
 ### About the Data
 The dataset[[1]](#1) I used is FitBit Fitness Tracker Data, which is available on Kaggle and provided by MÖBIUS. <br />
 It is collected from eligible Fitbit users who consented to submit personal tracker data via a survey distributed by Amazon Mechanical Turk between 03.12.2016 - 05.12.2016. <br />
-This dataset has overall 18 CSV files, including information about the minute-level output for physical activity, heart rate, weight and sleep monitoring between 04.12.2016 - 15.12.2016 (31 days period).
+This dataset has overall 18 CSV files, including information about the minute-level output for physical activity, heart rate, weight and sleep monitoring between 04.12.2016 - 05.12.2016 (31 days period).
 ### Data Storage and Organization
 After downloading the dataset, I opened all the CSV files in the spreadsheet (EXCEL) to see how are the data structured. <br />
 The dataset includes wide and narrow data. Each user has a unique ID so that we can distinguish between them. I noticed that 'dailyCalories_merged.csv', 'dailyIntensities_merged.csv' and 'dailySteps_merged.csv' are all included in 'dailyActivity_merged.csv', so I decided not to use these three files. <br />
