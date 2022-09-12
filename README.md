@@ -387,6 +387,7 @@ On the right, we have *18.18%* of users who live very healthily and completed al
 ## Act
 Based on the analysed data, to improve user engagement:
  * Introducing such smart devices that can be worn the whole day and do not need to be taken off. By emphasising the keywords like **"can be worn all the day"**, **"not harmful for the body"** and **"waterproof"** can target those clients who are lazy about changing/wearing and taking off smart devices. Also, this helps BellaBeat to collect more data, like sleep-related ones and makes our analysis more accurate.
+ * Add **warning system** into our smart device, which natofies our customers, when it detects too low/high heart rate. This can make more users relie on our smart device, also extend our targeted customer range. Especially those customers will be interested who are worried about their heart rate or having heart disease.
  * To motivate users to complete goals, we can introduce **rewards** when users complete a goal. Rewards, for instance, can be a collection of cute virtual badges. This can attract people who are passionate about collecting.
  * We can also add a **sign-in form** with rewards. Users can sign in when they have done enough sport.
  * To help users increase their active minutes, we can **notify (like using vibrations)** users when suitable, and users can only close these notifications when they have done enough sport.
